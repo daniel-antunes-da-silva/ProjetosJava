@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.time.Year;
+import java.util.Date;
 
 public class telaIdade extends JFrame {
     private JSpinner txtAN;
@@ -9,14 +13,26 @@ public class telaIdade extends JFrame {
     private JPanel painelPrincipal;
     private JLabel label;
     private JLabel lblIdade;
+    private JLabel lblAnoAtual;
+
 
     public telaIdade() {
         btnCalc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int ano_nasc = Integer.parseInt(txtAN.getValue().toString());
-                int idade = 2023 - ano_nasc;
+                int anoAtual = Year.now().getValue();
+                int anoNasc = Integer.parseInt(txtAN.getValue().toString());
+                int idade = anoAtual - anoNasc;
                 lblIdade.setText(Integer.toString(idade));
+                lblAnoAtual.setText(Integer.toString(anoAtual));
+            }
+        });
+
+        lblAnoAtual.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                int anoAtual = Year.now().getValue();
+                lblAnoAtual.setText(Integer.toString(anoAtual));
             }
         });
     }
