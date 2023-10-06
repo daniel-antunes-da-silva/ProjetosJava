@@ -1,0 +1,1 @@
+Exercício sobre tipos primitivos (aprendendo sobre conversão de tipos). Outros tópicos aprendidos: strings formatadas, leitura de dados por entrada (teclado).

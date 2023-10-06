@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TiposPrimitivos {
+public class TiposPrimitivosClass {
     public static void main(String[] args) {
         // Programinha para exibir nome e nota de um aluno, formatados.
         Scanner teclado = new Scanner(System.in);
