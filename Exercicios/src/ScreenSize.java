@@ -6,7 +6,7 @@ public class ScreenSize {
 
         double largura_tela = tamanhoTela.getWidth();
         double altura_tela = tamanhoTela.getHeight();
-        System.out.println("O tamanho da tela é "+largura_tela +"x"+ altura_tela);
-
+        System.out.printf("O tamanho da tela é %d x %d.", (int)largura_tela, (int)altura_tela);
+        
     }
 }
