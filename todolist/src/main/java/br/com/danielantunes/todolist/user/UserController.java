@@ -1,6 +1,9 @@
 package br.com.danielantunes.todolist.user;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
+
     /**
      * String (texto)
      * Integer (int)
@@ -26,11 +30,26 @@ public class UserController {
      * void (quando não tem um retorno do método, apenas quer q algo seja executado.
      */
 
+    // Pede para o string gerenciar automaticamente.
+    @Autowired
+    private IUserRepository userRepository;
+
+
+
     /*
      * Body
      */
     @PostMapping("/")
-    public void create(@RequestBody UserModel userModel) {
-        System.out.println(userModel.name);
+    public ResponseEntity create(@RequestBody UserModel userModel) {
+        var user = this.userRepository.findByUsername(userModel.getUsername());
+
+        if (user != null) {
+            System.out.println("Usuário já cadastrado!");
+            // Mensagem de erro
+            // Status Code
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário já cadastrado!");
+        }
+        var userCreated = this.userRepository.save(userModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userCreated);
     }
 }
